@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="with=device-witdth, initial-scale=1.0">
+    <title>Lizzy Charts</title>
+    <link rel="stylesheet" href="assets/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+<section class="header">
+    <nav>
+        <a href="index.html"><img src="assets/images/logo.png"></a>
+        <div class="nav-links" id="navLinks">
+            <i class="fa fa-times" onclick="hideMenu()"></i>
+            <ul>
+                <li><a href="index.html">HOME</a></li>
+                <li><a href="chart.html">CHART</a></li>
+                <li><a href="historical_data.html">HISTORICAL DATA</a></li>
+                <li><a href="strategies.html">STRATEGIES</a></li>
+                <li><a href="trades.html">TRADES</a></li>
+            </ul>
+        </div>
+        <i class="fa fa-bars" onclick="showMenu()"></i>
+    </nav>
+
+<div class="text-box">
+    <h1>Work like a cat, invest like a lion.</h1>
+    <p>A website dedicated to testing trading strategies in the futures market. Backtest, optimize, and collaborate with our vibrant community to maximize your trading success.</p>
+    <a href="" class="find-btn">Find out more</a>
+</div>
+</section>
+
+<!--bottom-text-->
+<section class="bottom-text">
+    <h1>Lizzy Charts was created with the objective of showcasing trading strategies and projects.</h1>
+    <p>Made with <i class="fa fa-heart-o"></i> by Cristina Schiappa Pietra. Inspired by Lizzy.</p>
+    
+    <div class="icons">
+        <i class="fa fa-linkedin"></i>
+    </div>
+</section>
+
+<!-- Javascript for Toggle Menu -->
+<script>
+    var navLinks = document.getElementById("navLinks");
+
+    function showMenu(){
+        navLinks.style.right = "0";
+    }
+
+    function hideMenu(){
+        navLinks.style.right = "-200px";
+    }
+</script>
+</body>
+</html>
