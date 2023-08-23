@@ -16,8 +16,7 @@ Welcome to Lizzy Charts, a web based portfolio of many trading strategies.
 Website dedicated to illuminating ES futures trading strategies, including interactive charts crafted using the power of Python.
 This comprehensive website offers not only insightful explanations of each strategy but also visually appealing charts illustrating entry and exit points, as well as other key indicators.
 
-![Dark_theme]()
-![Light_theme]()
+![Pic](https://github.com/cschiappa/lizzy-charts/blob/master/assets/images/image.png?raw=true)
 
 
 
