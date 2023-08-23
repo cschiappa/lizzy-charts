@@ -47,7 +47,7 @@ No installation is required. Simply visit my portfolio website at (website) to s
 
 LinkedIn - https://www.linkedin.com/in/cristina-pietra/ 
 
-Project Link: 
+Project Link: Coming soon
 
 Fun fact: Lizzy Charts was named after my best friend in the world, my cat!
 
