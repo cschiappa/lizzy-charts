@@ -106,9 +106,14 @@ candlestick_trace = go.Candlestick(
     decreasing_fillcolor='purple', #fill color
     increasing_line_color='#b3ffec', #line color
     decreasing_line_color='#df80ff', #line color
-      # Set the width of each candlestick
+    line=dict(width=4),
     
 )
+
+df_resample = df.resample("5T").max()
+merged_index = df.index.append(df_resample.index)
+timegap = merged_index[~merged_index.duplicated(keep=False)]
+dvalue = 5 * 60 * 1000  # 30min * 60sec/min * 1000msec/sec
 
 
 # Create additional scatter traces
@@ -119,24 +124,55 @@ scatter_traces = [
     go.Scatter(x=df.index, y=df.EMA3, line=dict(color='orange', width=1))
 ]
 
+# Calculate the date range for the x-axis
+end_date = df.index[-1]  # Get the last date in the data
+start_date = end_date - pd.Timedelta(days=2)  # Calculate the start date by subtracting 2 days
+
+# Filter the DataFrame to get data for the current day and the day before
+current_date = df.index[-1].date()
+day_before = current_date - pd.Timedelta(days=1)
+df_current_and_previous_day = df[(df.index.date == current_date) | (df.index.date == day_before)]
+
+# Calculate the margin for the y-axis to provide some padding
+y_margin = 0.1 * (df_current_and_previous_day['Close'].max() - df_current_and_previous_day['Close'].min())
+
+
 # Create layout
 layout = go.Layout(
     title='ES Chart',
     plot_bgcolor='#0d0d0d', # Background color to black
 
     xaxis=dict(
+        
         showgrid=False,  # Remove the grid from the x-axis
-        rangebreaks=[
-            dict(bounds=["sat", "mon"])
-        ]
+        rangemode="tozero",
+        range=[start_date, end_date],
+           
+
     ),
     yaxis=dict(
-        showgrid=False  # Remove the grid from the y-axis
+        showgrid=False,  # Remove the grid from the y-axis
+        fixedrange=False,  # Allow the y-axis to autoscale when the chart is zoomed
+        range=[df_current_and_previous_day['Close'].min() - y_margin, df_current_and_previous_day['Close'].max() + y_margin],
     )
 )
 
+
+
 # Create figure
 fig = go.Figure(data=[candlestick_trace, *scatter_traces], layout=layout)
+
+fig.update_xaxes(
+    rangebreaks=[
+        dict(values=timegap, dvalue=dvalue)
+    ],
+)
+
+# Customize the layout to change the border color
+fig.update_layout(
+    plot_bgcolor='black',  # Set the color of the border
+    paper_bgcolor='black',  # Set the background color
+)
 
 
 #plot entries
@@ -197,7 +233,7 @@ if len(trades) > 0:
 
               
 fig.update_layout(xaxis_rangeslider_visible=False)
-
+ 
 fig.show()
 
 # Save the chart as JSON
